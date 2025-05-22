@@ -1,0 +1,66 @@
+// direct method:
+class Solution {
+    public String largestNumber(int[] nums) {
+        String[] str = new String[nums.length];
+        for(int i = 0; i<nums.length; i++){
+            str[i] = Integer.toString(nums[i]);
+        }
+
+        Arrays.sort(str, (a,b) -> (b+a).compareTo(a+b));
+
+        if(str[0].equals("0")) return "0";
+        StringBuilder sb = new StringBuilder();
+        for(String s: str){
+            sb.append(s);
+        }
+        return sb.toString();
+    }
+}
+
+// using bubble sort:
+// class Solution {
+//     public String largestNumber(int[] nums) {
+//         String[] str = new String[nums.length];
+//         for (int i = 0; i < nums.length; i++) {
+//             str[i] = Integer.toString(nums[i]);
+//         }
+
+//         for (int i = 0; i < str.length - 1; i++) {
+//             for (int j = 0; j < str.length - i - 1; j++) {
+//                 String s1 = str[j];
+//                 String s2 = str[j + 1];
+
+//                 // s1+s2 or s2+s1
+//                 String option1 = s1 + s2;
+//                 String option2 = s2 + s1;
+
+//                 if (option1.compareTo(option2) < 0) {
+//                     String temp = str[j];
+//                     str[j] = str[j + 1];
+//                     str[j + 1] = temp;
+//                 }
+//             }
+//         }
+
+//         // Edge case: all zeros
+//         if (str[0].equals("0")) return "0";
+
+//         StringBuilder sb = new StringBuilder();
+//         for (String s : str) {
+//             sb.append(s);
+//         }
+//         return sb.toString();
+//     }
+// }
+
+/*
+Java’s Arrays.sort() will place elements in increasing order based on what the comparator returns.
+If compare(a, b) returns:
+Negative → a comes before b
+Positive → a comes after b
+
+Java’s Arrays.sort() uses this return value to decide the order:
+If result is negative → string1 goes before string2
+If result is positive → string2 goes before string1
+*/
+
